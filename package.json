@@ -1,0 +1,25 @@
+{
+  "name": "dolgopolov-simulator",
+  "version": "1.0.0",
+  "description": "Бот, имитирующий невероятный стиль юмора Долгополова",
+  "main": "main.js",
+  "dependencies": {
+    "easyvk": "^2.8.2",
+    "line-reader": "^0.4.0",
+    "node-telegram-bot-api": "^0.51.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/komorebithrowsatable/dolgopolov-simulator.git"
+  },
+  "author": "komorebithrows",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/komorebithrowsatable/dolgopolov-simulator/issues"
+  },
+  "homepage": "https://github.com/komorebithrowsatable/dolgopolov-simulator#readme"
+}
