@@ -15,8 +15,9 @@ const previousVKMessages = {}
 const activationPhrases = ["ахах", "ахап", "рофл", "))", "ору", "юмор", "смешно", "орирую", "f[f[f"];
 const settings = {
     minOriginalPart: 0.5,
-    randomFactor: 0.3,
-    maxJokeLenth: 30,
+    recommendedJokeLength: 6,
+    randomFactor: 0.01,
+    maxJokeLenth: 10,
     ignoreJokesShorterThan: 2
 }
 
@@ -91,7 +92,7 @@ function makeJoke(phrase) {
             });
             let picked = variants[0];
             joke.push(picked.word)
-            let itsTimeToStop = (picked.endingFactor > 0) ? ((picked.endingFactor + ((joke.length - 1) / settings.maxJokeLenth)) > Math.random()) : false;
+            let itsTimeToStop = (picked.endingFactor > 0) ? ((picked.endingFactor*2 + ((joke.length - settings.recommendedJokeLength) / settings.maxJokeLenth)) > Math.random()*2) : false;
             if (relations.length == 0) itsTimeToStop = true;
             if (itsTimeToStop) return words.join(" ") + " " + joke.join(" ");
             else {
