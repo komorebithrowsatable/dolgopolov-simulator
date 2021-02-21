@@ -12,12 +12,12 @@ const wordRelations = {};
 const previousTelegramMessages = {}
 const previousVKMessages = {}
 
-const activationPhrases = ["ахах", "ахап", "рофл", "))", "ору", "юмор", "смешно", "орирую", "f[f[f"];
+const activationPhrases = ["ахах", "ахап", "рофл", "))", "ору", "юмор", "смешно", "орирую", "f[f[f", ":D", "ржака", "ржомба"];
 const settings = {
     minOriginalPart: 0.5,
-    recommendedJokeLength: 6,
-    randomFactor: 0.01,
-    maxJokeLenth: 10,
+    recommendedJokeLength: 10,
+    randomFactor: 0.9,
+    maxJokeLenth: 20,
     ignoreJokesShorterThan: 2
 }
 
@@ -84,15 +84,15 @@ function makeJoke(phrase) {
                     word: relation,
                     weight: (wordRelations[word].relations[relation].count / wordRelations[word].totalRelationsUsed) + (Math.random() * settings.randomFactor),
                     endingFactor: (wordRelations[relation].usedAsEnding / wordRelations[relation].count)
-                })
+                });
             });
-            if (variants.length == 0) return words.join(" ") + " " + joke.join(" ");
+            if (variants.length == 0) return words.join(" ") + " " + joke.join(" "); 
             variants.sort((a, b) => {
-                return a.weight - b.weight;
+                return b.weight - a.weight;
             });
             let picked = variants[0];
             joke.push(picked.word)
-            let itsTimeToStop = (picked.endingFactor > 0) ? ((picked.endingFactor*2 + ((joke.length - settings.recommendedJokeLength) / settings.maxJokeLenth)) > Math.random()*2) : false;
+            let itsTimeToStop = (picked.endingFactor > 0.1) ? ((picked.endingFactor*2 + ((joke.length - settings.recommendedJokeLength) / settings.maxJokeLenth)) > Math.random()*2) : false;
             if (relations.length == 0) itsTimeToStop = true;
             if (itsTimeToStop) return words.join(" ") + " " + joke.join(" ");
             else {
@@ -192,3 +192,5 @@ easyvk({
     }
     reconnect();
 })
+
+console.log(settings)
